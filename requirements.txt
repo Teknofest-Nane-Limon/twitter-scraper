@@ -1,0 +1,2 @@
+python-decouple==3.6
+selenium~=4.3.0
