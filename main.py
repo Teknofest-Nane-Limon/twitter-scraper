@@ -24,7 +24,7 @@ def get_capture_tweets(scroll_page_size):
 def proc(keyword):
     make_search(keyword)
     time.sleep(2)
-    get_capture_tweets(3)
+    get_capture_tweets(5)
 
 
 def txt_read(path):
@@ -63,6 +63,7 @@ if __name__ == '__main__':
     for i in lines:
         try:
             proc(i)
+            time.sleep(2)
         except Exception as ex:
             print(f'Hata oldu : " {i} " kelimesinde!\n {ex}')
 
