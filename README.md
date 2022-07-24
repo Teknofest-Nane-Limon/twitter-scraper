@@ -31,3 +31,9 @@ Create your `.env` file.
 ```bash
     $ pip install -r requirements.txt
 ```
+
+## Created Keyword List
+- Create keyword_list.txt
+```bash
+    $ touch keyword_list.txt
+```
