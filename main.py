@@ -1,14 +1,12 @@
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
 import time
 from selenium.webdriver.common.by import By
 from decouple import config
+import pandas as pd
 
 
 def make_search(search_key):
-    search_input = driver.find_element(by=By.XPATH, value='//input[@data-testid="SearchBox_Search_Input"]')
-    search_input.send_keys(search_key)
-    search_input.send_keys(Keys.RETURN)
+    driver.get(f"https://twitter.com/search?q={search_key}&src=typed_query")
     time.sleep(2)
 
 
@@ -18,19 +16,28 @@ def get_capture_tweets(scroll_page_size):
         time.sleep(2)
         tweets = driver.find_elements(by=By.XPATH, value='//div[@data-testid="tweetText"]')
         times = driver.find_elements(by=By.XPATH, value='//time')
-        # print(f"***** {scroll}. Scroll *****")
-        # [print(f"\n---------- {index}. Tweet ----------\n{i.text}", "\n") for index, i in enumerate(tweets)]
-        # [print(f"\n---------- {index}. Times ----------\n{i.text}", "\n") for index, i in enumerate(times)]
+        time.sleep(2)
+        [captured_tweets_time.add(t.get_attribute("datetime")) for t in times]
+        [captured_tweets.add(tw.text) for tw in tweets]
 
-        time.sleep(2)
-        [captured_tweets.add(i.text) for i in tweets]
-        [captured_tweets_time.add(i.get_attribute("datetime")) for i in times]
-        time.sleep(2)
+
+def proc(keyword):
+    make_search(keyword)
+    time.sleep(2)
+    get_capture_tweets(3)
+
+
+def txt_read(path):
+    with open(path, 'r', encoding='UTF-8') as file:
+        while line := file.readline().rstrip():
+            lines.append(line)
 
 
 if __name__ == '__main__':
+    df = pd.DataFrame()
     driver = webdriver.Firefox()
     driver.get("https://twitter.com/i/flow/login")
+
     time.sleep(2)
 
     username = driver.find_element(by=By.XPATH, value='//input')
@@ -47,12 +54,23 @@ if __name__ == '__main__':
 
     time.sleep(2)
 
-    make_search("haklısınız")
-
-    time.sleep(2)
-
     captured_tweets, captured_tweets_time = set(), set()
+    lines = list()
 
-    get_capture_tweets(3)
-    [print(f"\n---- {i+1}. Tweet ----\n{list(captured_tweets)[i]} Date: {list(captured_tweets_time)[i]}", "\n")
-     for i in range(len(captured_tweets))]
+    # keyword_list.txt aranmak istenen anahtar kelimelerin listesi
+    txt_read('keyword_list.txt')
+
+    for i in lines:
+        try:
+            proc(i)
+        except Exception as ex:
+            print(f'Hata oldu : " {i} " kelimesinde!\n {ex}')
+
+    # [print(f"\n---- {i + 1}. Tweet ----\n{list(captured_tweets)[i]} Date: {list(captured_tweets_time)[i]}", "\n")
+    # for i in range(len(captured_tweets))]
+
+    df['Tweet'] = list(captured_tweets)
+
+    # print(df.head(10))
+    # print(df.info)
+    df.to_csv('data.csv')
