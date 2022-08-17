@@ -15,15 +15,13 @@ def get_capture_tweets(scroll_page_size):
         driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
         time.sleep(2)
         tweets = driver.find_elements(by=By.XPATH, value='//div[@data-testid="tweetText"]')
-        times = driver.find_elements(by=By.XPATH, value='//time')
         time.sleep(2)
-        [captured_tweets_time.add(t.get_attribute("datetime")) for t in times]
         [captured_tweets.add(tw.text) for tw in tweets]
 
 
 def proc(keyword):
     make_search(keyword)
-    time.sleep(2)
+    time.sleep(5)
     get_capture_tweets(5)
 
 
@@ -62,16 +60,14 @@ if __name__ == '__main__':
 
     for i in lines:
         try:
+            driver.implicitly_wait(2)
             proc(i)
-            time.sleep(2)
+            driver.implicitly_wait(2)
         except Exception as ex:
             print(f'Hata oldu : " {i} " kelimesinde!\n {ex}')
 
-    # [print(f"\n---- {i + 1}. Tweet ----\n{list(captured_tweets)[i]} Date: {list(captured_tweets_time)[i]}", "\n")
-    # for i in range(len(captured_tweets))]
-
-    df['Tweet'] = list(captured_tweets)
+    df['text'] = list(captured_tweets)
 
     # print(df.head(10))
     # print(df.info)
-    df.to_csv('data.csv')
+    df.to_csv('data.csv', index=False)
