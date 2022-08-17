@@ -2,6 +2,8 @@ Twitter'dan belirlediğimiz anahtar kelimelerle ilgili tweetleri çekmek için y
 Selenium ile insan davranışları sergilenerek istenildiği kadar veri çekilmesi sağlanmıştır.
 Anahtar kelimeleri aratma nedenimiz belirli sınıflara ait tweetleri hedef göstermek ve bu sayede ihtiyacımız olan corpusa daha kolay ulaşmaktır.
 
+#### Aracın kullanımını anlatan video için <youtube-link>
+
 # Ortam Oluşturma
 
 Lütfen Python sürümünüzü '3.10' olarak ayarlayın.
