@@ -4,6 +4,29 @@ Anahtar kelimeleri aratma nedenimiz belirli sınıflara ait tweetleri hedef gös
 
 #### Aracın kullanımını anlatan video için <youtube-link>
 
+
+# Selenium
+    
+[Selenium](https://www.selenium.dev/about/) bir web page testing aracıdır. 
+Asıl görevi veri çekmek değildir. Fakat aşağıdaki nedenlerden dolayı veri kazıma işlemi bu test aracı ile yapılmıştır.
+
+- Twitter tasarımlarında html taglerinin id, name ve class bilgilerini sürekli değiştiren bir script kullanmaktadır. 
+- Ayrıca site içerisindeki gezinme hızına göre botları tespit ederek banlama yoluna gitmiştir. 
+
+Bu engelleri aşabilmek için **twitter-scraper** uygulaması içerisinde insani davranışlar düşünülerek bir algoritma kurgulanmıştır. 
+    
+## Selenium Gereklilikleri
+    
+Selenium bir browser oturumu açıp işlemlerini yapmaktadır. Açacağı browser oturumu için bir firefox browser driver ına ihtiyaç duymaktadır.
+
+#### Mac için:
+
+brew install geckodriver
+
+#### Diğerleri için:
+
+link : https://www.selenium.dev/documentation/webdriver/getting_started/install_drivers/
+    
 # Ortam Oluşturma
 
 Lütfen Python sürümünüzü '3.10' olarak ayarlayın.
