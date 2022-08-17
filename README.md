@@ -1,39 +1,53 @@
+Twitter'dan belirlediğimiz anahtar kelimelerle ilgili tweetleri çekmek için yazdığımız bir bot aracıdır. 
+Selenium ile insan davranışları sergilenerek istenildiği kadar veri çekilmesi sağlanmıştır.
+Anahtar kelimeleri aratma nedenimiz belirli sınıflara ait tweetleri hedef göstermek ve bu sayede ihtiyacımız olan corpusa daha kolay ulaşmaktır.
 
-## Environment
+# Ortam Oluşturma
 
-Please set up your Python version to `3.10`
+Lütfen Python sürümünüzü '3.10' olarak ayarlayın.
 
-- `
-python3 --version
-`
+Python versiyonunuzdan emin olmak için:
 
-Create your `.env` file.
-
-- `cd <project-directory>`
 ```bash
+python3 --version
+```
+
+`.env` dosyanızı oluşturun.
+
+```bash
+    $ cd <project-directory>
     $ touch .env
 ```
+.env dosyasının içerisine twitter hesabınızın e-mail ve parola bilgilerini ekleyip kaydediniz.
 ```bash
-    $ EMAIL=<your_mail_adress@mail.com>
-    $ PASSWORD=<your_password>
+    EMAIL=<your_mail_adress@mail.com>
+    PASSWORD=<your_password>
 ```
 
-## Setting Development Environment
-- Create virtual environment
+## Geliştirme Ortamını Ayarlamak
+- Virtual environment oluşturunuz.
 ```bash
     $ python -m venv <venv-name>
 ```
-- Activate the virtual environment
+- Virtual environmentınızı aktive ediniz.
 ```bash
     $ source <venv-name>/bin/activate
 ```
-- Install libraries
+- Kütüphaneleri Yükleyiniz.
 ```bash
     $ pip install -r requirements.txt
 ```
 
-## Created Keyword List
-- Create keyword_list.txt
+## Anahtar Kelime Listesi Oluşturma
+- keyword_list.txt oluşturunuz.
 ```bash
     $ touch keyword_list.txt
+```
+
+# Çalıştırma
+
+Uygulamanın çalışması için gerekli adımlar tamamlanmıştır.
+
+```bash
+    $ python3 main.py
 ```
